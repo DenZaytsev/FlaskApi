@@ -1,0 +1,37 @@
+version: '3'
+
+services:
+
+  python:
+    build:
+      context: ./docker/python
+    container_name: python
+    restart: always
+    volumes:
+      - ./app:/app/
+    ports:
+      - 8080:8080
+    env_file:
+      - ./.env
+    command: python3 main.py
+    depends_on:
+      - redis
+      - db
+
+  db:
+    image: postgres
+    ports:
+      - 5431:5432
+    environment:
+      - POSTGRES_DB
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+
+  redis:
+    image: 'bitnami/redis:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD
+      - REDIS_PASSWORD
+    container_name: redis
+    restart: always
+
