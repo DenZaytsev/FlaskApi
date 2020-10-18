@@ -17,10 +17,13 @@ class Cart:
 
     def add_item(self, product: str, quantity: int = 1):
         """Добавить продукт в корзину или обновить его количество."""
-
         try:
             self.cart[product] += quantity
         except KeyError as e:
             self.cart[product] = quantity
 
         self._save()
+
+    def get_quantity_of_all_items(self):
+        """Возвращает кол-во всех вещей в корзине."""
+        return sum(quantity for quantity in self.cart.values())
