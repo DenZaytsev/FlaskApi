@@ -35,3 +35,28 @@ services:
     container_name: redis
     restart: always
 
+  worker:
+    build:
+      context: ./docker/python
+    container_name: worker
+    env_file:
+      - ./.env
+    user: nobody
+    depends_on:
+      - redis
+    command: celery -A myapp.celery worker -l DEBUG
+    volumes:
+      - ./app:/app/
+
+  beat:
+    build:
+      context: ./docker/python
+    env_file:
+      - ./.env
+    container_name: beat
+    depends_on:
+      - redis
+      - worker
+    command: celery -A myapp.celery beat --schedule=/tmp/celerybeat-schedule --loglevel=INFO --pidfile=/tmp/celerybeat.pid
+    volumes:
+      - ./app:/app/

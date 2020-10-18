@@ -1,5 +1,4 @@
 import os
-
 import redis
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -17,13 +16,19 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     REDIS_URL = os.environ.get('REDIS_URL')
+
+    SESSION_TYPE = 'redis'
     SESSION_REDIS = redis.from_url(REDIS_URL)
 
     CELERY_BROKER_URL = REDIS_URL
     CELERY_ACCEPT_CONTENT = ['json']
     CELERY_TIMEZONE = 'UTC'
-    CELERY_TASK_LIST = []
+    CELERY_TASK_LIST = [
+        'tasks.tasks',
+        'tasks.scheduler'
+    ]
     CELERY_RESULT_BACKEND = REDIS_URL
-    CELERYBEAT_SCHEDULE = {}
+    CELERYBEAT_SCHEDULE = {
 
-    SESSION_TYPE = 'redis'
+    }
+

@@ -7,8 +7,8 @@ Flask-Migrate==2.0.2
 Flask-Script==2.0.5
 psycopg2-binary
 celery==5.0.0
-flower==0.9.5
 pydantic==1.6.1
 Flask-Session
+flask-classy
 
 pytest==3.0.5
