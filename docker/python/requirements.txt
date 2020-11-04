@@ -9,6 +9,5 @@ psycopg2-binary
 celery==5.0.0
 pydantic==1.6.1
 Flask-Session
-flask-classy
 
 pytest==3.0.5

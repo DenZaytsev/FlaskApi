@@ -27,3 +27,6 @@ class Cart:
     def get_quantity_of_all_items(self):
         """Возвращает кол-во всех вещей в корзине."""
         return sum(quantity for quantity in self.cart.values())
+
+    def __str__(self):
+        return self.cart

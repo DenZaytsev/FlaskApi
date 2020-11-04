@@ -6,7 +6,6 @@ from sqlalchemy.orm import sessionmaker
 
 from .celery import make_celery
 from .config import Config
-from views import CartView, CartAddView
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -20,5 +19,4 @@ celery = make_celery(app)
 
 redis = FlaskRedis(app)
 
-CartView.register(app, route_base='/cart/')
-CartAddView.register(app, route_base='/cart/add-to-cart/')
+
