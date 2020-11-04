@@ -11,12 +11,13 @@ app = Flask(__name__)
 app.config.from_object(Config)
 flask_session = Session(app)
 
+
 engine = create_engine(app.config['SQLALCHEMY_DATABASE_URI'], pool_size=100, max_overflow=10, convert_unicode=True)
 DbSession = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 db_global_session = DbSession()
 
+
 celery = make_celery(app)
 
+
 redis = FlaskRedis(app)
-
-

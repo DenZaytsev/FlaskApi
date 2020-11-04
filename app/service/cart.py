@@ -1,3 +1,4 @@
+from dataclasses import dataclass, asdict
 
 
 class Cart:
@@ -7,7 +8,7 @@ class Cart:
         self.session = session
         try:
             self.cart = session['cart']
-        except KeyError as e:
+        except KeyError:
             self.cart = session['cart'] = dict()
 
     def _save(self):
@@ -17,9 +18,10 @@ class Cart:
 
     def add_item(self, product: str, quantity: int = 1):
         """Добавить продукт в корзину или обновить его количество."""
+
         try:
             self.cart[product] += quantity
-        except KeyError as e:
+        except KeyError:
             self.cart[product] = quantity
 
         self._save()
@@ -30,3 +32,8 @@ class Cart:
 
     def __str__(self):
         return self.cart
+
+
+@dataclass
+class Item:
+    ...
