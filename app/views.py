@@ -51,7 +51,6 @@ class CartView(BaseView):
             'cartContent': cart.cart,
             'allItemQuantity': cart.get_quantity_of_all_items()
         }
-
         return Response(status=200, response=dumps(data), mimetype='application/json')
 
 
@@ -81,3 +80,5 @@ class CartAddView(BaseView):
             'allItemQuantity': cart.get_quantity_of_all_items()
         }
         return Response(status=200, response=dumps(data), mimetype='application/json')
+
+

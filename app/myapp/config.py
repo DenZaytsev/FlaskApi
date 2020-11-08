@@ -32,3 +32,4 @@ class Config:
 
     }
 
+    STORAGE_REDIS = redis.from_url(REDIS_URL, db=3)
